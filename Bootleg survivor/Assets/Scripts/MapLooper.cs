@@ -14,7 +14,6 @@ public class InfiniteMap : MonoBehaviour
     private GameObject rightMapTile;
     private GameObject bottomMapTile;
     private GameObject leftMapTile;
-    private GameObject patchMapTile;
     private GameObject[] mapCorners;
 
     private float tileWidth;
@@ -57,7 +56,6 @@ public class InfiniteMap : MonoBehaviour
         rightMapTile = Instantiate(MapPrefab, new Vector3(tileWidth, 0f, 0), Quaternion.identity);
         bottomMapTile = Instantiate(MapPrefab, new Vector3(0, -tileHeight, 0), Quaternion.identity);
         leftMapTile = Instantiate(MapPrefab, new Vector3(-tileWidth, 0, 0), Quaternion.identity);
-        patchMapTile = Instantiate(MapPrefab, new Vector3(tileWidth, tileHeight, 0), Quaternion.identity);
 
         mapCorners = new GameObject[4];
         mapCorners[0] = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
