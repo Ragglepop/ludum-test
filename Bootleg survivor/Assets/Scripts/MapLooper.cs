@@ -30,9 +30,6 @@ public class InfiniteMap : MonoBehaviour
         left
     }
 
-    private PartOfMap prevPartOfMap = PartOfMap.topRight;
-    private PartOfMap currentPartOfMap = PartOfMap.topRight;
-
     private enum PartOfMap{
         topRight,
         bottomRight,

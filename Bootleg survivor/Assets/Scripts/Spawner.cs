@@ -21,8 +21,8 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        float x = State._.player.transform.position.x + Random.Range(-10, 10);
-        float y = State._.player.transform.position.y + Random.Range(-10, 10);
-        State._.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
+        float x = State.instance.player.transform.position.x + Random.Range(-10, 10);
+        float y = State.instance.player.transform.position.y + Random.Range(-10, 10);
+        State.instance.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
     }
 }

@@ -16,6 +16,6 @@ public class Movement : MonoBehaviour
             yMultiplier *= axisRatio;
         }
 
-        camera.transform.Translate(xMultiplier*State._.player.speed, yMultiplier*State._.player.speed, 0);
+        camera.transform.Translate(xMultiplier*State.instance.player.speed, yMultiplier*State.instance.player.speed, 0);
     }
 }

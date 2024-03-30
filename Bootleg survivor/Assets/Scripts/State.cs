@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State : MonoBehaviour
 {
-    public static State _; //Singleton
+    public static State instance; //Singleton
     public Player player;
     public List<EnemyAI> EnemyList;
 
@@ -12,7 +12,7 @@ public class State : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _ = this;
+        instance = this;
     }
 
     // Update is called once per frame
