@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    public GameObject player;
     public float speed = 1f;
     private const int speed_scaler = 100;
 
@@ -17,7 +18,6 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         // Move to player
-        GameObject player = GameObject.Find("Triangle");
         if (player == null)
         {
             Debug.Log("Player not found");

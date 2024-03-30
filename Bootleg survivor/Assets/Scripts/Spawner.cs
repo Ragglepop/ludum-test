@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject Camera;
+    public GameObject player;
     public GameObject[] Enemies;
 
     public float spawn_period;
@@ -40,9 +40,10 @@ public class Spawner : MonoBehaviour
         int enemy_index = Random.Range(0, Enemies.Length);
         GameObject enemy = Enemies[enemy_index];
 
-        float x = Camera.transform.position.x + Random.Range(-10, 10);
-        float y = Camera.transform.position.y + Random.Range(-10, 10);
+        float x = player.transform.position.x + Random.Range(-10, 10);
+        float y = player.transform.position.y + Random.Range(-10, 10);
 
         Instantiate(enemy, new Vector3(x, y, 0), Quaternion.identity);
+        enemy.GetComponent<EnemyAI>().player = player;
     }
 }
