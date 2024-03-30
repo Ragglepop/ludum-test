@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float speed;
     public float health = 100;
-
     private int enemy_collider_count = 0;
 
 

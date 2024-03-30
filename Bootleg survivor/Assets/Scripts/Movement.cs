@@ -5,7 +5,6 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public GameObject camera;
-    public float speed;
     private float axisRatio;
 
     private void Start(){
@@ -21,6 +20,6 @@ public class Movement : MonoBehaviour
             yMultiplier *= axisRatio;
         }
 
-        camera.transform.Translate(xMultiplier*speed, yMultiplier*speed, 0);
+        camera.transform.Translate(xMultiplier*State._.player.speed, yMultiplier*State._.player.speed, 0);
     }
 }

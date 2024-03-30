@@ -5,22 +5,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject[] Enemies;
-
+    public GameObject EnemyPrefab;
+    public List<GameObject> EnemyList;
     public float spawn_period;
-
-
     private float last_spawn_time = 0;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         if (Time.time - last_spawn_time > spawn_period)
         {
@@ -31,19 +21,8 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (Enemies.Length == 0)
-        {
-            Debug.Log("No enemies to spawn");
-            return;
-        }
-
-        int enemy_index = Random.Range(0, Enemies.Length);
-        GameObject enemy = Enemies[enemy_index];
-
-        float x = player.transform.position.x + Random.Range(-10, 10);
-        float y = player.transform.position.y + Random.Range(-10, 10);
-
-        Instantiate(enemy, new Vector3(x, y, 0), Quaternion.identity);
-        enemy.GetComponent<EnemyAI>().player = player;
+        float x = State._.player.transform.position.x + Random.Range(-10, 10);
+        float y = State._.player.transform.position.y + Random.Range(-10, 10);
+        State._.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
     }
 }
