@@ -62,7 +62,7 @@ public class InfiniteMap : MonoBehaviour
         UpdateMapCorners();
     }
 
-    private void FixedUpdate(){
+    private void Update(){
 
         if(Camera.transform.position.x > rightBorderPos){//Go past right border
             leftBorderPos = rightBorderPos;

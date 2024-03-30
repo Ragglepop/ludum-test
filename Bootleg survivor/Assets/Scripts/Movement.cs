@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public GameObject PlayerCamera;
     private float axisRatio = Mathf.Sqrt(1f/2f);
 
+    // Has to used FixedUpdate otherwise transform.Translate will be bound to framerate
     private void FixedUpdate(){
         float xMultiplier = Input.GetAxis("Horizontal");
         float yMultiplier = Input.GetAxis("Vertical");
