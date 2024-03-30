@@ -39,6 +39,6 @@ public class Spawner : MonoBehaviour
         float angle = Random.Range(0, 360);
         float x = State.instance.player.transform.position.x + distance * Mathf.Cos(angle);
         float y = State.instance.player.transform.position.y + distance * Mathf.Sin(angle);
-        State.instance.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Enemy>());
+        Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Enemy>();
     }
 }

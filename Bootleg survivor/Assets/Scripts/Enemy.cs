@@ -8,6 +8,11 @@ public class Enemy : MonoBehaviour
     public float speed = 1f;
     private const int speed_scaler = 100;
 
+    void Awake()
+    {
+        State.instance.EnemyList.Add(this);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -17,8 +22,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("Player not found");
 
             // Destroy self
-            Destroy(gameObject);
-            return;
+            die();
         }
 
         Vector3 direction = State.instance.player.transform.position - transform.position;
@@ -31,7 +35,13 @@ public class Enemy : MonoBehaviour
         max_health -= damage;
         if (max_health <= 0)
         {
-            Destroy(gameObject);
+            die();
         }
+    }
+
+    public void die()
+    {
+        State.instance.EnemyList.Remove(this);
+        Destroy(gameObject);
     }
 }
