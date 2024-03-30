@@ -8,13 +8,6 @@ public class Player : MonoBehaviour
     public float health = 100;
     private int enemy_collider_count = 0;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -41,7 +34,6 @@ public class Player : MonoBehaviour
             enemy_collider_count++;
         }
     }
-
 
     void OnTriggerExit2D(Collider2D collision)
     {

@@ -8,7 +8,6 @@ public class State : MonoBehaviour
     public Player player;
     public List<EnemyAI> EnemyList;
 
-
     // Start is called before the first frame update
     void Awake()
     {
