@@ -14,6 +14,7 @@ public class InfiniteMap : MonoBehaviour
     private GameObject rightMapTile;
     private GameObject bottomMapTile;
     private GameObject leftMapTile;
+    private GameObject[] mapCorners;
 
     private float tileWidth;
     private float tileHeight;
@@ -29,10 +30,19 @@ public class InfiniteMap : MonoBehaviour
         left
     }
 
+    private PartOfMap prevPartOfMap = PartOfMap.topRight;
+    private PartOfMap currentPartOfMap = PartOfMap.topRight;
+
+    private enum PartOfMap{
+        topRight,
+        bottomRight,
+        bottomLeft,
+        topLeft
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
         tileWidth = Background.transform.localScale.x;
         tileHeight = Background.transform.localScale.y;
 
@@ -42,26 +52,25 @@ public class InfiniteMap : MonoBehaviour
         leftBorderPos = -tileWidth/2;
 
         centreMapTile = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        centreMapTile.name="Centre map tile";
-
         topMapTile = Instantiate(MapPrefab, new Vector3(0, tileHeight, 0), Quaternion.identity);
-        topMapTile.name="Top map tile";
-
         rightMapTile = Instantiate(MapPrefab, new Vector3(tileWidth, 0f, 0), Quaternion.identity);
-        rightMapTile.name="Right map tile";
-
         bottomMapTile = Instantiate(MapPrefab, new Vector3(0, -tileHeight, 0), Quaternion.identity);
-        bottomMapTile.name="Bottom map tile";
-
         leftMapTile = Instantiate(MapPrefab, new Vector3(-tileWidth, 0, 0), Quaternion.identity);
-        leftMapTile.name="Left map tile";
+
+        mapCorners = new GameObject[4];
+        mapCorners[0] = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        mapCorners[1] = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        mapCorners[2] = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        mapCorners[3] = Instantiate(MapPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        UpdateMapCorners();
     }
 
     private void FixedUpdate(){
+
         if(Camera.transform.position.x > rightBorderPos){//Go past right border
-            Debug.Log("Went past right border");
             leftBorderPos = rightBorderPos;
             rightBorderPos += tileWidth;
+            UpdateMapCorners();
 
             MoveTile(topMapTile, Direction.right);
             MoveTile(bottomMapTile, Direction.right);
@@ -73,9 +82,9 @@ public class InfiniteMap : MonoBehaviour
             rightMapTile = oldLeft;
             centreMapTile = oldRight;
         }else if(Camera.transform.position.x < leftBorderPos){//Go past left border
-            Debug.Log("Went past left border");
             rightBorderPos = leftBorderPos;
             leftBorderPos -= tileWidth;
+            UpdateMapCorners();
 
             MoveTile(topMapTile, Direction.left);
             MoveTile(bottomMapTile, Direction.left);
@@ -90,9 +99,9 @@ public class InfiniteMap : MonoBehaviour
             centreMapTile = oldLeft;
             centreMapTile.name = "Left map tile";
         }else if(Camera.transform.position.y > topBorderPos){//Go past top border
-            Debug.Log("Went past top border");
             bottomBorderPos = topBorderPos;
             topBorderPos += tileHeight;
+            UpdateMapCorners();
 
             MoveTile(leftMapTile, Direction.up);
             MoveTile(rightMapTile, Direction.up);
@@ -104,9 +113,9 @@ public class InfiniteMap : MonoBehaviour
             topMapTile = oldBottom;
             centreMapTile = oldTop;
         }else if(Camera.transform.position.y < bottomBorderPos){//Go past bottom border
-            Debug.Log("Went past bottom border");
             topBorderPos = bottomBorderPos;
             bottomBorderPos -= tileHeight;
+            UpdateMapCorners();
 
             MoveTile(leftMapTile, Direction.down);
             MoveTile(rightMapTile, Direction.down);
@@ -118,6 +127,13 @@ public class InfiniteMap : MonoBehaviour
             bottomMapTile = oldTop;
             centreMapTile = oldBottom;
         }
+    }
+
+    private void UpdateMapCorners(){
+        mapCorners[0].transform.position = new Vector3(rightBorderPos+tileWidth/2, topBorderPos+tileHeight/2, 0);
+        mapCorners[1].transform.position = new Vector3(rightBorderPos+tileWidth/2, bottomBorderPos-tileHeight/2, 0);
+        mapCorners[2].transform.position = new Vector3(leftBorderPos-tileWidth/2, bottomBorderPos-tileHeight/2, 0);
+        mapCorners[3].transform.position = new Vector3(leftBorderPos-tileWidth/2, topBorderPos+tileHeight/2, 0);
     }
 
     private Vector3 AdjustVector(Vector3 vector, float x, float y, float z){
