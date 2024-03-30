@@ -5,24 +5,41 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject EnemyPrefab;
-    public List<GameObject> EnemyList;
+    public GameObject[] EnemyPrefabs;
     public float spawn_period;
-    private float last_spawn_time = 0;
+    private float next_spawn_time = 0;
+    private int spawn_count = 0;
 
     private void Update()
     {
-        if (Time.time - last_spawn_time > spawn_period)
+        if (next_spawn_time < Time.time)
         {
-            last_spawn_time = (float)Time.time;
+            next_spawn_time = Time.time + spawn_period;
             Spawn();
         }
     }
 
     private void Spawn()
     {
-        float x = State._.player.transform.position.x + Random.Range(-10, 10);
-        float y = State._.player.transform.position.y + Random.Range(-10, 10);
-        State._.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
+        spawn_count++;
+        if (spawn_count % 10 == 0)
+        {
+            spawn_period -= 0.1f;
+            spawn_period = Mathf.Max(0.5f, spawn_period);
+        }
+
+        float distance = Random.Range(12, 15);
+        float angle = Random.Range(0, 360);
+
+        float x = State._.player.transform.position.x + distance * Mathf.Cos(angle);
+        float y = State._.player.transform.position.y + distance * Mathf.Sin(angle);
+
+        GameObject EnemyPrefab = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
+        if (EnemyPrefab == null)
+        {
+            Debug.LogError("Spawner EnemyPrefab is null");
+            return;
+        }
+        State._.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Enemy>());
     }
 }

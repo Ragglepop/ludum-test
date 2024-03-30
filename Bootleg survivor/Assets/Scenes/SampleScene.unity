@@ -285,8 +285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fc9e6caad3bae4f9b3bd4d1054ba27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
-  health: 100
+  weapon: {fileID: 8498040644780600609, guid: 3127ca37deda83d4cbc4c8c9f5cda1fc, type: 3}
+  speed: 0.075
+  damage_rate: 1
+  regen_rate: 0.05
+  projectile_spawn_period: 3
+  max_health: 100
 --- !u!114 &458349827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,8 +458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1655f9975257de48bbead76b326f122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 8498040644780600609, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
-  EnemyList: []
+  EnemyPrefabs:
+  - {fileID: 8498040644780600609, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
+  - {fileID: 2726118277950106406, guid: 570ade762031576499c7f3e655ba59cd, type: 3}
   spawn_period: 5
 --- !u!114 &1917551022
 MonoBehaviour:

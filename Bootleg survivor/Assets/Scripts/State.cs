@@ -6,7 +6,7 @@ public class State : MonoBehaviour
 {
     public static State _; //Singleton
     public Player player;
-    public List<EnemyAI> EnemyList;
+    public List<Enemy> EnemyList;
 
 
     // Start is called before the first frame update
