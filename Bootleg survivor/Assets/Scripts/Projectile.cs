@@ -11,6 +11,11 @@ public class Projectile : MonoBehaviour
     private float start_angle;
     private Vector3 start_position;
 
+    void Awake()
+    {
+        State.instance.ProjectilesList.Add(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +31,16 @@ public class Projectile : MonoBehaviour
     {
         if (Time.time - birth_time > 5)
         {
-            Destroy(gameObject);
+            die();
         }
 
         float age = Time.time - birth_time;
         distance = age * speed;
-        float angle = start_angle + (age) * speed;
+        float angle = start_angle + age * speed;
         float x = start_position.x + distance * Mathf.Cos(angle);
         float y = start_position.y + distance * Mathf.Sin(angle);
         transform.position = new Vector3(x, y, 0);
-        transform.Rotate(0, 0, angle);
+        transform.Rotate(0, 0, speed);
     }
     
     void OnTriggerEnter2D(Collider2D collision)
@@ -45,5 +50,11 @@ public class Projectile : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
+    }
+
+    void die()
+    {
+        State.instance.ProjectilesList.Remove(this);
+        Destroy(gameObject);
     }
 }

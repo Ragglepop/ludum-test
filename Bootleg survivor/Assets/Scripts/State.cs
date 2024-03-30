@@ -7,6 +7,7 @@ public class State : MonoBehaviour
     public static State instance; //Singleton
     public Player player;
     public List<Enemy> EnemyList;
+    public List<Projectile> ProjectilesList;
 
     // Start is called before the first frame update
     void Awake()
