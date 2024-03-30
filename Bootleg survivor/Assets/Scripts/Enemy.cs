@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         // Move to player
-        if (State._.player == null)
+        if (State.instance.player == null)
         {
             Debug.Log("Player not found");
 

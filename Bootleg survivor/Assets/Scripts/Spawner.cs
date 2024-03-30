@@ -28,17 +28,17 @@ public class Spawner : MonoBehaviour
             spawn_period = Mathf.Max(0.5f, spawn_period);
         }
 
-        float distance = Random.Range(12, 15);
-        float angle = Random.Range(0, 360);
-
         GameObject EnemyPrefab = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
         if (EnemyPrefab == null)
         {
             Debug.LogError("Spawner EnemyPrefab is null");
             return;
         }
-        float x = State.instance.player.transform.position.x + Random.Range(-10, 10);
-        float y = State.instance.player.transform.position.y + Random.Range(-10, 10);
-        State.instance.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
+
+        float distance = Random.Range(12, 15);
+        float angle = Random.Range(0, 360);
+        float x = State.instance.player.transform.position.x + distance * Mathf.Cos(angle);
+        float y = State.instance.player.transform.position.y + distance * Mathf.Sin(angle);
+        State.instance.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Enemy>());
     }
 }
