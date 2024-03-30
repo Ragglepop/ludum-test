@@ -5,11 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public GameObject camera;
-    private float axisRatio;
-
-    private void Start(){
-        axisRatio = Mathf.Sqrt(1f/2f);
-    }
+    private float axisRatio = Mathf.Sqrt(1f/2f);
 
     private void FixedUpdate(){
         float xMultiplier = Input.GetAxis("Horizontal");
