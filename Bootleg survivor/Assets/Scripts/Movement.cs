@@ -5,11 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public GameObject camera;
-    private float axisRatio;
-
-    private void Start(){
-        axisRatio = Mathf.Sqrt(1f/2f);
-    }
+    private float axisRatio = Mathf.Sqrt(1f/2f);
 
     private void FixedUpdate(){
         float xMultiplier = Input.GetAxis("Horizontal");
@@ -20,6 +16,6 @@ public class Movement : MonoBehaviour
             yMultiplier *= axisRatio;
         }
 
-        camera.transform.Translate(xMultiplier*State._.player.speed, yMultiplier*State._.player.speed, 0);
+        camera.transform.Translate(xMultiplier*State.instance.player.speed, yMultiplier*State.instance.player.speed, 0);
     }
 }

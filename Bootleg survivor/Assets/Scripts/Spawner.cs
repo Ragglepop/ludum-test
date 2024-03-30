@@ -31,15 +31,14 @@ public class Spawner : MonoBehaviour
         float distance = Random.Range(12, 15);
         float angle = Random.Range(0, 360);
 
-        float x = State._.player.transform.position.x + distance * Mathf.Cos(angle);
-        float y = State._.player.transform.position.y + distance * Mathf.Sin(angle);
-
         GameObject EnemyPrefab = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
         if (EnemyPrefab == null)
         {
             Debug.LogError("Spawner EnemyPrefab is null");
             return;
         }
-        State._.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Enemy>());
+        float x = State.instance.player.transform.position.x + Random.Range(-10, 10);
+        float y = State.instance.player.transform.position.y + Random.Range(-10, 10);
+        State.instance.EnemyList.Add(Instantiate(EnemyPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<EnemyAI>());
     }
 }

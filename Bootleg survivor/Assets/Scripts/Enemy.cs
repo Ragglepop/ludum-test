@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        Vector3 direction = State._.player.transform.position - transform.position;
+        Vector3 direction = State.instance.player.transform.position - transform.position;
         direction.Normalize();
         transform.position += direction * speed / speed_scaler;
     }
