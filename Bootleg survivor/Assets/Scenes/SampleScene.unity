@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 1917551018}
   - component: {fileID: 1917551019}
   - component: {fileID: 1917551020}
+  - component: {fileID: 1917551021}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -362,6 +363,22 @@ MonoBehaviour:
   Camera: {fileID: 519420028}
   MapPrefab: {fileID: 6335223610564594254, guid: bd2b584b5ff28f54eba8b4410b95a48f, type: 3}
   Background: {fileID: 2134750854}
+--- !u!114 &1917551021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917551017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1655f9975257de48bbead76b326f122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 519420028}
+  Enemies:
+  - {fileID: 8498040644780600609, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
+  spawn_period: 0
 --- !u!1 &2134750854
 GameObject:
   m_ObjectHideFlags: 0
