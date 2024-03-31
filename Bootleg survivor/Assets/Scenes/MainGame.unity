@@ -1716,6 +1716,7 @@ MonoBehaviour:
   - {fileID: 2726118277950106406, guid: 570ade762031576499c7f3e655ba59cd, type: 3}
   spawn_period: 3.5
   increase_difficulty_after_spawn_count: 7
+  increase_difficulty_spawn_time: 0.25
 --- !u!114 &1917551022
 MonoBehaviour:
   m_ObjectHideFlags: 0
