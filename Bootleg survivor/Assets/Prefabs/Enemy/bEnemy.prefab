@@ -102,7 +102,7 @@ MonoBehaviour:
   damage: 4
   max_health: 100
   health: 1
-  speed: 3
+  speed: 4
   attackInterval: 0.5
   Name: 
   ScoreValue: 5

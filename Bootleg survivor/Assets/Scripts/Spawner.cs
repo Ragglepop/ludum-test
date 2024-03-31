@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] EnemyPrefabs;
     public float spawn_period;
+    public int increase_difficulty_after_spawn_count;
     private float next_spawn_time = 0;
     private int spawn_count = 0;
 
@@ -25,10 +26,10 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         spawn_count++;
-        if (spawn_count % 10 == 0)
+        if (spawn_count % increase_difficulty_after_spawn_count == 0)
         {
             spawn_period -= 0.1f;
-            spawn_period = Mathf.Max(0.5f, spawn_period);
+            spawn_period = Mathf.Max(0.25f, spawn_period);
         }
 
         GameObject EnemyPrefab = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
