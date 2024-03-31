@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     private float distance;
     private float birth_time;
     private float start_angle;
-    private Vector3 start_position;
+    private int direction = 1;
 
     void Awake()
     {
@@ -19,40 +19,56 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Projectile created");
         birth_time = Time.time;
         start_angle = Random.Range(0, 2 * Mathf.PI);
         distance = 0f;
-        start_position = transform.position;
+
+        // Called here to avoid a frame where the projectile is not in the right position
+        UpdatePosition();
+    }
+
+    // Set the direction of the projectile
+    public void SetDirection(int dir)
+    {
+        if (dir >= 0) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdatePosition();
+    }
+    
+    void UpdatePosition()
+    {
         if (Time.time - birth_time > 5)
         {
-            die();
+            Die();
         }
 
         float age = Time.time - birth_time;
-        distance = age * speed;
-        float angle = start_angle + age * speed;
-        float x = start_position.x + distance * Mathf.Cos(angle);
-        float y = start_position.y + distance * Mathf.Sin(angle);
-        transform.position = new Vector3(x, y, 0);
-        transform.Rotate(0, 0, speed);
+        distance = 1 + age * speed / 3;
+        float angle = start_angle + direction * age * speed;
+        float x = State.instance.player.transform.position.x + distance * Mathf.Cos(angle);
+        float y = State.instance.player.transform.position.y + distance * Mathf.Sin(angle);
+        // Setting rotation an position of the projectile
+        // Projectile will move in a circle around the player, always facing the player
+        transform.SetPositionAndRotation(new Vector3(x, y, 0), Quaternion.Euler(Mathf.Rad2Deg * angle * Vector3.forward));
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        if (enemy != null)
+        if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
         {
             enemy.TakeDamage(damage);
         }
     }
 
-    void die()
+    void Die()
     {
         State.instance.ProjectilesList.Remove(this);
         Destroy(gameObject);

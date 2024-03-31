@@ -56,5 +56,9 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Bootleg survivor.sln"
+    "dotnet.defaultSolution": "Bootleg survivor.sln",
+    "cSpell.words": [
+        "Lerp",
+        "Mathf"
+    ]
 }
