@@ -8,10 +8,15 @@ public class State : MonoBehaviour
     public Player player;
     public List<Enemy> EnemyList;
     public List<Projectile> ProjectilesList;
+    public int Score;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
+    }
+
+    public void IncrementScore(int amount){
+        Score += amount;
     }
 }

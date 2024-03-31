@@ -40,6 +40,9 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(State.instance.player.health <= 0){
+            return;
+        }
         UpdatePosition();
     }
     

@@ -89,12 +89,9 @@ public class InfiniteMap : MonoBehaviour
 
             GameObject oldRight = rightMapTile;
             rightMapTile = centreMapTile;
-            rightMapTile.name = "Centre map tile";
             GameObject oldLeft = leftMapTile;
             leftMapTile = oldRight;
-            leftMapTile.name = "Right map tile";
             centreMapTile = oldLeft;
-            centreMapTile.name = "Left map tile";
         }else if(Camera.transform.position.y > topBorderPos){//Go past top border
             bottomBorderPos = topBorderPos;
             topBorderPos += tileHeight;

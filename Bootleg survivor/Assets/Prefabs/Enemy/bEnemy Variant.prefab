@@ -53,12 +53,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
     - target: {fileID: 7699299212516392000, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
+      propertyPath: name
+      value: Bulky
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699299212516392000, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
       propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7699299212516392000, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
       propertyPath: damage
-      value: 2
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699299212516392000, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
+      propertyPath: ScoreValue
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7699299212516392000, guid: 1bddf3593027dd447a68c9b538b6a79d, type: 3}
       propertyPath: max_health

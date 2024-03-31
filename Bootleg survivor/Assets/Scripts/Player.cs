@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,11 +11,13 @@ public class Player : MonoBehaviour
     public float damage_rate = 1;
     public float regen_rate = 1;
     public float projectile_spawn_period = 3.0f;
+    public Slider HPSlider;
     private float next_projectile_spawn = 0;
     public float max_health = 100;
-    private float min_health = 100;
-    private float health = 100;
+    private float min_health = 0;
+    public float health = 100;
     private int n_projectiles = 0;
+    public static event Action PlayerDied;
 
 
     // Start is called before the first frame update
@@ -25,13 +29,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(State.instance.player.health <= 0){
+            return;
+        }
         SpawnProjectile();
         RegenerateHealth();
     }
 
     void RegenerateHealth()
     {
-        health += regen_rate * Time.deltaTime;
+        if(health < max_health){
+            if(health + regen_rate * Time.deltaTime > max_health){
+                health = max_health;
+            }else{
+                health += regen_rate * Time.deltaTime;
+            }
+        }
+        HPSlider.value=health;
     }
 
     void SpawnProjectile()
@@ -44,23 +58,18 @@ public class Player : MonoBehaviour
             n_projectiles++;
         }
     }
-    
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
-        {
-            TakeDamage(enemy.damage);
-        }
-    }
 
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         health = Mathf.Clamp(health, min_health, max_health);
 
+        HPSlider.value=health;
+
         if (health <= min_health)
         {
             Debug.Log("Player is dead");
+            PlayerDied?.Invoke();
         }
     }
 }

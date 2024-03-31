@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if(State.instance.player.health <= 0){
+            return;
+        }
         if (next_spawn_time < Time.time)
         {
             next_spawn_time = Time.time + spawn_period;
